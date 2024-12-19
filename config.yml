@@ -1,0 +1,5 @@
+database:
+  driverClass: com.mysql.jdbc.Driver
+  user: todolistuser
+  password: todolistpassword
+  url: jdbc:mysql://localhost/todolist
