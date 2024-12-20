@@ -1,6 +1,10 @@
 package org.satyam.todolist.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.AssertTrue;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
 import java.time.LocalDateTime;
@@ -32,6 +36,7 @@ public class Todo {
         // Default constructor required for JDBI
     }
 
+    @NotNull
     @JsonProperty
     @ColumnName("id")
     public int getId() {
@@ -42,6 +47,7 @@ public class Todo {
         this.id = id;
     }
 
+    @NotEmpty
     @JsonProperty
     @ColumnName("title")
     public String getTitle() {
@@ -52,6 +58,7 @@ public class Todo {
         this.title = title;
     }
 
+    @NotEmpty
     @JsonProperty
     @ColumnName("description")
     public String getDescription() {
@@ -62,6 +69,8 @@ public class Todo {
         this.description = description;
     }
 
+    @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm dd-MM-yyyy")
     @JsonProperty
     @ColumnName("startDateTime")
     public LocalDateTime getStartDateTime() {
@@ -72,6 +81,8 @@ public class Todo {
         this.startDateTime = startDateTime;
     }
 
+    @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm dd-MM-yyyy")
     @JsonProperty
     @ColumnName("targetDateTime")
     public LocalDateTime getTargetDateTime() {
@@ -82,6 +93,7 @@ public class Todo {
         this.targetDateTime = targetDateTime;
     }
 
+    @NotNull
     @JsonProperty
     @ColumnName("status")
     public TaskStatus getStatus() {
@@ -90,6 +102,15 @@ public class Todo {
 
     public void setStatus(TaskStatus status) {
         this.status = status;
+    }
+
+    //Validation to check that the target date stays always after start date
+    @AssertTrue(message = "Target date must be after start date")
+    private boolean isTargetDateValid() {
+        if (startDateTime == null || targetDateTime == null) {
+            return true;
+        }
+        return targetDateTime.isAfter(startDateTime);
     }
 
     //To handle string received as the task status

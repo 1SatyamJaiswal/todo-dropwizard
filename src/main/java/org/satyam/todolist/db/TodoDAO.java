@@ -20,7 +20,7 @@ public interface TodoDAO {
     @SqlUpdate("INSERT INTO todolist (id, title, description, startDateTime, targetDateTime, status) values (null, :title, :description, :startDateTime, :targetDateTime, :status)")
     int createTodo(@Bind("title") String title, @Bind("description") String description, @Bind("startDateTime")LocalDateTime startDateTime, @Bind("targetDateTime") LocalDateTime targetDateTime, @Bind("status")Todo.TaskStatus status);
 
-    @SqlUpdate("UPDATE todolist SET title = :title, description = :description, startDateTime = :startDateTime, targetDateTime = :targetDateTime, status = :status WHERE id = :id)")
+    @SqlUpdate("UPDATE todolist SET title = :title, description = :description, startDateTime = :startDateTime, targetDateTime = :targetDateTime, status = :status WHERE id = :id")
     void updateTodo(@Bind("id") int id, @Bind("title") String title, @Bind("description") String description, @Bind("startDateTime")LocalDateTime startDateTime, @Bind("targetDateTime") LocalDateTime targetDateTime, @Bind("status")Todo.TaskStatus status);
 
     @SqlUpdate("DELETE FROM todolist WHERE id = :id")
