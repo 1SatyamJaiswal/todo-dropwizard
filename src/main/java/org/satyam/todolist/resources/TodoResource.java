@@ -1,4 +1,4 @@
-package org.satyam.todolist;
+package org.satyam.todolist.resources;
 
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;

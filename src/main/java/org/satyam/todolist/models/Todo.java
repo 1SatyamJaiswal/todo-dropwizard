@@ -14,15 +14,20 @@ public class Todo {
     private int id;
     private String title;
     private String description;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm dd-MM-yyyy")
     private LocalDateTime startDateTime;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm dd-MM-yyyy")
     private LocalDateTime targetDateTime;
+
     private TaskStatus status;
 
     public enum TaskStatus {
         Todo,
         WIP,
         Done
-    };
+    }
 
     public Todo(int id, String title, String description, LocalDateTime startDateTime, LocalDateTime targetDateTime, TaskStatus status) {
         this.id = id;
@@ -71,7 +76,6 @@ public class Todo {
     }
 
     @NotNull
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm dd-MM-yyyy")
     @JsonProperty
     @ColumnName("startDateTime")
     public LocalDateTime getStartDateTime() {
@@ -83,7 +87,6 @@ public class Todo {
     }
 
     @NotNull
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm dd-MM-yyyy")
     @JsonProperty
     @ColumnName("targetDateTime")
     public LocalDateTime getTargetDateTime() {
@@ -105,7 +108,7 @@ public class Todo {
         this.status = status;
     }
 
-    //Validation to check that the target date stays always after start date
+    // Validation to check that the target date stays always after the start date
     @AssertTrue(message = "Target date must be after start date")
     private boolean isTargetDateValid() {
         if (startDateTime == null || targetDateTime == null) {
@@ -114,7 +117,7 @@ public class Todo {
         return targetDateTime.isAfter(startDateTime);
     }
 
-    //To handle string received as the task status
+    // To handle string received as the task status
     public static TaskStatus fromString(String status) {
         return switch (status.toLowerCase()) {
             case "todo" -> TaskStatus.Todo;

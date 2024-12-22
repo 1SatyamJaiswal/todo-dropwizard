@@ -1,7 +1,6 @@
 package org.satyam.todolist;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.ws.rs.core.Response;
 import org.junit.jupiter.api.Test;
 import org.satyam.todolist.models.Todo;
 
