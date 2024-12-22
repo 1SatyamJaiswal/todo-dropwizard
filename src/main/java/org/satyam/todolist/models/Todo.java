@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Todo {
     private int id;
@@ -121,5 +122,23 @@ public class Todo {
             case "done" -> TaskStatus.Done;
             default -> throw new IllegalArgumentException("Unknown status: " + status);
         };
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Todo todo = (Todo) obj;
+        return Objects.equals(id, todo.getId()) &&
+                Objects.equals(title, todo.getTitle()) &&
+                Objects.equals(description, todo.getDescription()) &&
+                Objects.equals(startDateTime, todo.getStartDateTime()) &&
+                Objects.equals(targetDateTime, todo.getTargetDateTime()) &&
+                Objects.equals(status, todo.getStatus());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, description, startDateTime, targetDateTime, status);
     }
 }
