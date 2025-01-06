@@ -5,7 +5,6 @@ import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 import org.satyam.todolist.models.Todo;
-
 import java.time.LocalDateTime;
 import java.util.List;
 

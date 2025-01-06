@@ -7,6 +7,7 @@ import io.dropwizard.db.DataSourceFactory;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.mapper.reflect.BeanMapper;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
+import org.satyam.todolist.health.NewTodoHealthCheck;
 import org.satyam.todolist.models.Todo;
 import org.satyam.todolist.resources.TodoResource;
 import org.slf4j.Logger;
@@ -41,6 +42,9 @@ public class App extends Application<TodoListConfiguration> {
 
         // Add the resource to the environment
         environment.jersey().register(new TodoResource(jdbi));
+
+        // Register health check
+        environment.healthChecks().register("todo", new NewTodoHealthCheck());
     }
 
     public Jdbi getJdbi() {
