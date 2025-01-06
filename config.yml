@@ -1,4 +1,4 @@
 database:
   user: todolistuser
   password: todolistpassword
-  url: jdbc:mysql://localhost/todolist
+  url: jdbc:mysql://db/todolist

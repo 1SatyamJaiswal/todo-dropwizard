@@ -47,6 +47,18 @@ For Linux systems, use:
 docker run -p 8080:8080 -p 8081:8081 --add-host=host.docker.internal:host-gateway todolist-app
 ```
 
+### Docker-Compose Deployment
+
+1. To build and run the project
+```bash
+docker-compose up --build
+```
+
+2. To stop the project
+```bash
+docker-compose down
+```
+
 ## API Endpoints
 
 ### Todo Tasks

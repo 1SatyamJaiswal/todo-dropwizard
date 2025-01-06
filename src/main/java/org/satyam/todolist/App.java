@@ -1,7 +1,5 @@
 package org.satyam.todolist;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import io.dropwizard.core.Application;
 import io.dropwizard.core.setup.Bootstrap;
 import io.dropwizard.core.setup.Environment;
@@ -13,7 +11,6 @@ import org.satyam.todolist.models.Todo;
 import org.satyam.todolist.resources.TodoResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import javax.sql.DataSource;
 
 public class App extends Application<TodoListConfiguration> {

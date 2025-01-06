@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+    image: todolist-app
+    ports:
+      - "8080:8080"  # Application port
+      - "8081:8081"  # Admin port
+    depends_on:
+      - db
+    environment:
+      - DB_USER=todolistuser
+      - DB_PASSWORD=todolistpassword
+    networks:
+      - todo-network
+
+  db:
+    image: mysql:8.3
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_DATABASE=todolist
+      - MYSQL_USER=todolistuser
+      - MYSQL_PASSWORD=todolistpassword
+      - MYSQL_ROOT_PASSWORD=12345
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - todo-network
+    command: --default-authentication-plugin=mysql_native_password
+
+volumes:
+  mysql-data:
+
+networks:
+  todo-network:
+    driver: bridge
